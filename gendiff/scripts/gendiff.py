@@ -1,13 +1,15 @@
+#!/usr/bin/env python
+
 import argparse
+from gendiff.generate_diff import generate_diff
 
 
 def main():
-    # Создаем объект ArgumentParser с описанием
+
     parser = argparse.ArgumentParser(
         description = 'Compares two configuration files and shows a difference.'
     )
 
-    # Добавляем позиционные аргументы
     parser.add_argument(
         'first_file',
         help = 'path to the first file'
@@ -17,21 +19,14 @@ def main():
         help = 'path to the second file'
     )
 
-    # Аргумент -h уже добавлен по умолчанию через add_help=True в ArgumentParser
-    # Поэтому, дополнительных настроек не требуется
-
-    # Добавляем опциональный аргумент для формата
     parser.add_argument(
         '-f', '--format',
         help = 'set format of output'
     )
-
-    # Парсим аргументы
+    
     args = parser.parse_args()
 
-    # Точка входа для логики приложения
-    # Например, можно вызвать функцию для сравнения файлов
-    # Например: compare_files(args.first_file, args.second_file)
-
+    print(generate_diff(args.first_file, args.second_file))
+  
 if __name__ == '__main__':
     main()
