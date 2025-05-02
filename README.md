@@ -3,4 +3,4 @@
 
 ### Links
 Asciinema play video generate difference
-[![asciicast](https://asciinema.org/a/45M7valtIygIqxKGKuyvZgnpS.svg)](https://asciinema.org/a/45M7valtIygIqxKGKuyvZgnpS)
+<script src="https://asciinema.org/a/45M7valtIygIqxKGKuyvZgnpS.js" id="asciicast-45M7valtIygIqxKGKuyvZgnpS" async="true"></script>
