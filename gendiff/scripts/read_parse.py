@@ -16,7 +16,3 @@ def parse_file(file_path, file_format):
     """Комбинированная функция чтения и парсинга файла."""
     data = read_file(file_path)
     return parse_data(data, file_format)
-
-
-
-print(parse_file('/home/dixon/python-project-50/file2.json', 'json'))
