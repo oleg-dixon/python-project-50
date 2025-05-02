@@ -25,3 +25,4 @@ packages = ["gendiff"]
 
 [project.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
+difference = "gendiff.main:main"
