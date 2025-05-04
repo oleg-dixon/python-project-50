@@ -4,8 +4,8 @@ install:
 help:
 	uv run -- gendiff -h
 
-FILE1 ?= /home/dixon/python-project-50/file1.json
-FILE2 ?= /home/dixon/python-project-50/file2.json
+FILE1 ?= /home/dixon/python-project-50/gendiff/tests/test_data/file1.json
+FILE2 ?= /home/dixon/python-project-50/gendiff/tests/test_data/file2.json
 
 difference:
 	uv run gendiff $(FILE1) $(FILE2)
