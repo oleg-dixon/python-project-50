@@ -72,3 +72,8 @@ app/assets/builds/
 
 # Additionally: exclude the folder with recordings
 /asciinema_recordings/
+
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/
