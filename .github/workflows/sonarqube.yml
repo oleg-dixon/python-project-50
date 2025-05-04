@@ -32,5 +32,5 @@ jobs:
           args: >
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.projectKey=oleg-dixon_python-project-50
-            -Dsonar.organization=oleg-dixon
+            -Dsonar.organization=oleg-dixon-555
             -Dsonar.python.coverage.reportPaths=coverage.xml
