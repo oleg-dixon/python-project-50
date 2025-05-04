@@ -19,13 +19,8 @@ package-install:
 package-reassemble:
 	uv tool install --force dist/*.whl
 
-# check-lint:
-# 	uv run ruff check brain_games
+check-lint:
+	uv run ruff check gendiff
 
-# fix-lint:
-# 	uv run ruff check --fix brain_games
-
-
-# asciinema rec -i 1 session.cast
-# gendiff file1.json file2.json
-# make difference
+fix-lint:
+	uv run ruff check --fix gendiff
