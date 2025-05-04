@@ -1,5 +1,6 @@
 import json
 
+
 def read_file(file_path):
     """Читает и возвращает содержимое файла как строку."""
     with open(file_path, 'r') as file:
