@@ -1,52 +1,59 @@
 def format_value(value, depth):
-    print(f"Formatting value: {value}")
-    if isinstance(value, bool):
-        return 'false' if value is False else 'true'
-    if value is None:
-        return 'null'
     if isinstance(value, dict):
-        indent = ' ' * (depth * 4)
-        lines = [
-            f'{indent}    {k}: {format_value(v, depth + 1)}'
-            for k, v in value.items()
-        ]
-        return "{\n" + "\n".join(lines) + f"\n{indent}  }}"
-    if isinstance(value, list):
-        indent = ' ' * (depth * 4)
-        lines = [
-            f'{indent}    {item}' for item in value
-        ]
-        return "[\n" + "\n".join(lines) + f"\n{indent}  ]"
-    return str(value)
+        indent_size = 4
+        indent = ' ' * (depth * indent_size)
+        closing_indent = ' ' * ((depth - 1) * indent_size)
+        lines = []
+
+        for key, val in value.items():
+            formatted_val = format_value(val, depth + 1)
+            lines.append(f"{indent}{key}: {formatted_val}")
+
+        return '{\n' + '\n'.join(lines) + f'\n{closing_indent}}}'
+    elif isinstance(value, bool):
+        return 'true' if value else 'false'
+    elif value is None:
+        return 'null'
+    else:
+        return str(value)
 
 
 def format_stylish(diff_tree, depth=0):
-    result = []
-    indent = '  ' * depth
+    lines = []
+    indent_size = 4
+    indent = ' ' * (depth * indent_size)
+    sign_indent = ' ' * (depth * indent_size - 2) if depth > 0 else ''
+
     for node in diff_tree:
-        print(f"Processing node: {node}")
         key = node['key']
         status = node['status']
 
         if status == 'added':
-            result.append(f"{indent}+ {key}: {node['value']}")
+            value = format_value(node['value'], depth + 1)
+            lines.append(f"{sign_indent}+ {key}: {value}  # Добавлена")
         elif status == 'removed':
-            result.append(f"{indent}- {key}: {node['value']}")
+            value = format_value(node['value'], depth + 1)
+            lines.append(f"{sign_indent}- {key}: {value}  # Удалена")
         elif status == 'changed':
-            result.append(f"{indent}- {key}: {node['old_value']}")
-            result.append(f"{indent}+ {key}: {node['new_value']}")
+            old_value = format_value(node['old_value'], depth + 1)
+            new_value = format_value(node['new_value'], depth + 1)
+            lines.append(
+                f"{sign_indent}- {key}: {old_value}  "
+                "# Старое значение"
+                )
+            lines.append(
+                f"{sign_indent}+ {key}: {new_value}  "
+                "# Новое значение"
+                )
         elif status == 'unchanged':
-            result.append(f"{indent}  {key}: {node['value']}")
+            value = format_value(node['value'], depth + 1)
+            lines.append(f"{indent}    {key}: {value}")
         elif status == 'nested':
-            result.append(f"{indent}  {key}: {{")
-            result.append(format_stylish(node['children'], depth + 1))
-            result.append(f"{indent}  }}")
-        elif isinstance(node['value'], list):
-            result.append(f"{indent}  {key}: [")
-            for item in node['value']:
-                result.append(f"{indent}    {item}")
-            result.append(f"{indent}  ]")
-    return '\n'.join(result)
+            children = format_stylish(node['children'], depth + 1)
+            lines.append(f"{indent}    {key}: {{\n{children}\n{indent}    }}")
+
+    return '\n'.join(lines)
+
 
 
 

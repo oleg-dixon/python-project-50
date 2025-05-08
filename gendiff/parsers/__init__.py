@@ -16,7 +16,6 @@ def parse_content(content, extension):
 def load_file(path):
     with open(path, 'r') as file:
         content = file.read()
-        print(f"Loaded content from {path}: {content[:200]}...")
         if path.endswith('.json'):
             return json.loads(content)
         elif path.endswith('.yaml') or path.endswith('.yml'):
