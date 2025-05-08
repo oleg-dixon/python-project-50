@@ -13,11 +13,14 @@ def parse_content(content, extension):
     raise ValueError(f"Unsupported file extension: {extension}")
 
 
-def load_file(file_path):
-    """Загружает и парсит файл"""
-    path = Path(file_path)
-    if not path.is_absolute():
-        path = Path(__file__).parent.parent.parent / path
-    with open(path) as f:
-        content = f.read()
-    return parse_content(content, path.suffix.lower())
+def load_file(path):
+    with open(path, 'r') as file:
+        content = file.read()
+        print(f"Loaded content from {path}: {content[:200]}...")
+        if path.endswith('.json'):
+            return json.loads(content)
+        elif path.endswith('.yaml') or path.endswith('.yml'):
+            return yaml.safe_load(content)
+        else:
+            raise ValueError(f"Unsupported file format: {path}")
+
