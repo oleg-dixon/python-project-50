@@ -2,13 +2,16 @@ install:
 	uv sync
 
 help:
-	uv run -- gendiff -h
+	@echo "gendiff -h"
+	@uv run -- gendiff -h
 
-FILE1 ?= /home/dixon/python-project-50/gendiff/tests/test_data/file1.json
-FILE2 ?= /home/dixon/python-project-50/gendiff/tests/test_data/file2.json
+FILE1 ?= gendiff/tests/test_data/file1.json
+FILE2 ?= gendiff/tests/test_data/file2.json
 
 difference:
-	uv run gendiff $(FILE1) $(FILE2)
+	@test -f $(FILE1) || (echo "Error: $(FILE1) not found"; exit 1)
+	@test -f $(FILE2) || (echo "Error: $(FILE2) not found"; exit 1)
+	uv run -- gendiff $(FILE1) $(FILE2)
 
 build:
 	uv build
