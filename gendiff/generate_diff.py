@@ -1,5 +1,5 @@
-from gendiff.parsers import load_file
 from gendiff.engine import build_diff, format_diff
+from gendiff.parsers import load_file
 
 
 def generate_diff(file_path1, file_path2):
