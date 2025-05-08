@@ -1,6 +1,5 @@
 import json
 from pathlib import Path
-
 import yaml
 
 
@@ -14,12 +13,12 @@ def parse_content(content, extension):
 
 
 def load_file(path):
-    with open(path, 'r') as file:
-        content = file.read()
-        if path.endswith('.json'):
-            return json.loads(content)
-        elif path.endswith('.yaml') or path.endswith('.yml'):
-            return yaml.safe_load(content)
-        else:
-            raise ValueError(f"Unsupported file format: {path}")
-
+    try:
+        with open(path, 'r') as file:
+            content = file.read()
+            extension = Path(path).suffix
+            return parse_content(content, extension)
+    except FileNotFoundError:
+        raise ValueError(f"File not found: {path}")
+    except Exception as e:
+        raise ValueError(f"Error reading {path}: {str(e)}")

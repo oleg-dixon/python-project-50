@@ -10,7 +10,7 @@ common: {
     }
     setting6: {
         doge: {
-            - wow:
+            - wow: this is a large test
             + wow: so much
         }
         key: value
@@ -38,4 +38,5 @@ group1: {
             number: 45
         }
     }
+    fee: 100500
 }

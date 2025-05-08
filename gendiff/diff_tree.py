@@ -16,13 +16,16 @@ def build_diff_tree(data1, data2):
                 'value': data1[key]
             })
         elif isinstance(data1[key], dict) and isinstance(data2[key], dict):
+            # Рекурсивное сравнение для вложенных словарей
             children = build_diff_tree(data1[key], data2[key])
-            diff.append({
-                'key': key,
-                'status': 'nested',
-                'children': children
-            })
+            if children:
+                diff.append({
+                    'key': key,
+                    'status': 'nested',
+                    'children': children
+                })
         elif isinstance(data1[key], list) and isinstance(data2[key], list):
+            # Для списков проверка их изменений
             if data1[key] != data2[key]:
                 diff.append({
                     'key': key,
@@ -31,6 +34,7 @@ def build_diff_tree(data1, data2):
                     'new_value': data2[key]
                 })
         elif data1[key] != data2[key]:
+            # Сравнение примитивных значений
             diff.append({
                 'key': key,
                 'status': 'changed',
@@ -43,4 +47,5 @@ def build_diff_tree(data1, data2):
                 'status': 'unchanged',
                 'value': data1[key]
             })
+
     return diff
