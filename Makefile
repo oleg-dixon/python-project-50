@@ -9,6 +9,7 @@ FILE1 ?= gendiff/tests/test_data/file1.json
 FILE2 ?= gendiff/tests/test_data/file2.json
 
 difference:
+	@echo "Using files: $(FILE1) and $(FILE2)"
 	@test -f $(FILE1) || (echo "Error: $(FILE1) not found"; exit 1)
 	@test -f $(FILE2) || (echo "Error: $(FILE2) not found"; exit 1)
 	uv run -- gendiff $(FILE1) $(FILE2)
