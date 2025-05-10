@@ -1,4 +1,19 @@
-def format_stylish(diff, depth=0):
+from typing import Any, Dict, List
+
+
+def format_stylish(diff: List[Dict[str, Any]], depth: int = 0) -> str:
+    """
+    Formats the diff into a stylish, human-readable string with indentation 
+    and nested structures.
+
+    Args:
+        diff (list): A list of dictionaries representing the diff data.
+        depth (int): The current depth level for indentation.
+
+    Returns:
+        str: A stylishly formatted string representing the diff, with updates, 
+             additions, removals, and changes.
+"""
     indent = '    ' * depth
     lines = []
     
@@ -40,7 +55,17 @@ def format_stylish(diff, depth=0):
     return '\n'.join(lines)
 
 
-def format_value(value, depth):
+def format_value(value: Any, depth: int) -> str:
+    """
+    Formats a value for display in the diff, with nested structures handled.
+
+    Args:
+        value (any): The value to be formatted.
+        depth (int): The current depth level for indentation.
+
+    Returns:
+        str: A formatted string representation of the value.
+    """
     if isinstance(value, dict):
         indent = '    ' * (depth + 1)
         lines = ['{']

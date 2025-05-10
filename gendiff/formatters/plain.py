@@ -1,4 +1,19 @@
-def format_plain(diff, parent_key=''):
+from typing import Any, Dict, List
+
+
+def format_plain(diff: List[Dict[str, Any]], parent_key: str = '') -> str:
+    """
+    Formats a diff into a human-readable plain text string.
+
+    Args:
+        diff (list): A list of dictionaries representing the diff data.
+        parent_key (str): A string representing the parent key to be used 
+                          in nested structures.
+
+    Returns:
+        str: A plain-text representation of the diff, with updates, additions, 
+             removals, and changes.
+"""
     lines = []
     for node in sorted(diff, key=lambda x: x['key']):
         key = node['key']
@@ -23,7 +38,16 @@ def format_plain(diff, parent_key=''):
     return '\n'.join(lines)
 
 
-def format_value(value):
+def format_value(value: Any) -> str:
+    """
+    Formats a value for display in the diff.
+
+    Args:
+        value (any): The value to be formatted.
+
+    Returns:
+        str: A formatted string representation of the value.
+    """
     if isinstance(value, dict):
         return '[complex value]'
     elif isinstance(value, bool):
