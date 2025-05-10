@@ -7,6 +7,14 @@ This project implements a CLI tool that compares two configuration files in JSON
 
 For more details, check out the GitHub repository: [python-project-50](https://github.com/oleg-dixon/python-project-50.git).
 
+### Setup
+
+```bash
+git clone git@github.com:oleg-dixon/python-project-50.git
+
+make install
+```
+
 ### Asciinema play videos:
 [![Demo_1](https://asciinema.org/a/45M7valtIygIqxKGKuyvZgnpS.svg?rows=20)](https://asciinema.org/a/45M7valtIygIqxKGKuyvZgnpS)
 
