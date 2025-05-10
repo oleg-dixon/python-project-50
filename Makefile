@@ -5,8 +5,8 @@ help:
 	@echo "gendiff -h"
 	@uv run -- gendiff -h
 
-FILE1 ?= gendiff/tests/test_data/file1.json
-FILE2 ?= gendiff/tests/test_data/file2.json
+FILE1 ?= gendiff/tests/fixtures/file1.json
+FILE2 ?= gendiff/tests/fixtures/file2.json
 
 difference:
 	@echo "Using files: $(FILE1) and $(FILE2)"
