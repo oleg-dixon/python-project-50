@@ -12,6 +12,7 @@ FIXTURES_DIR = os.path.join(os.path.dirname(__file__), 'fixtures')
     ('file1.json', 'file2.json', 'expected_stylish.txt', 'stylish'),
     ('file1.yaml', 'file2.yaml', 'expected_stylish.txt', 'stylish'),
     ('file1.json', 'file2.json', 'expected_json.json', 'json'),
+    ('file1.json', 'file2.json', 'expected_plain.txt', 'plain'),
     ('empty1.json', 'empty2.json', 'expected_empty.txt', 'stylish'),
 ])
 def test_generate_diff(file1, file2, expected_file, format_name):

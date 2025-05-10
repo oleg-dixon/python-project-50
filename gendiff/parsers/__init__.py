@@ -13,13 +13,23 @@ def parse_content(content, extension):
     raise ValueError(f"Unsupported file extension: {extension}")
 
 
+FIXTURES_DIR = Path(__file__).resolve().parent.parent / 'tests' / 'fixtures'
+
+
 def load_file(path):
+    path = Path(path).expanduser()
+
+    if path.exists():
+        actual_path = path.resolve()
+    else:
+        fixture_path = FIXTURES_DIR / path
+        if fixture_path.exists():
+            actual_path = fixture_path.resolve()
+        else:
+            raise FileNotFoundError(f"File not found: {path}")
+
     try:
-        with open(path, 'r') as file:
-            content = file.read()
-            extension = Path(path).suffix
-            return parse_content(content, extension)
-    except FileNotFoundError:
-        raise ValueError(f"File not found: {path}")
+        content = actual_path.read_text(encoding='utf-8')
+        return parse_content(content, actual_path.suffix)
     except Exception as e:
-        raise ValueError(f"Error reading {path}: {str(e)}")
+        raise ValueError(f"Error reading {actual_path}: {str(e)}")
