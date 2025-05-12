@@ -40,14 +40,14 @@ def main() -> None:
         '-f', '--format',
         metavar='FORMAT',
         help='Set the format of the output (e.g., json, plain, stylish).',
-        default='json'
+        default='stylish'
     )
 
     args = parser.parse_args()
     print(generate_diff(
         args.first_file,
         args.second_file,
-        format_name=args.format
+        args.format
     ))
 
 
